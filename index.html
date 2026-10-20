@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Clics - Colegio Bolívar</title>
+</head>
+<body>
+
+    <header>
+        <h1>Colegio Bolívar</h1>
+        <h2>Contador de Clics para Eventos</h2>
+    </header>
+
+    <main>
+        <p>Haz clic en el botón para incrementar el contador.</p>
+
+        <h2 id="contador">0</h2>
+
+        <button id="btnContar" onclick="incrementarContador()">
+            ¡Haz clic aquí!
+        </button>
+
+        <button onclick="reiniciarContador()">
+            Reiniciar contador
+        </button>
+    </main>
+
+    <footer>
+        <p>Colegio Bolívar - Cali, Colombia</p>
+    </footer>
+
+    <script>
+        // Variable para almacenar el número de clics
+        let clics = 0;
+
+        // Función para incrementar el contador
+        function incrementarContador() {
+            clics++;
+
+            // Actualizar el contenido de la página
+            document.getElementById("contador").textContent = clics;
+        }
+
+        // Función para reiniciar el contador
+        function reiniciarContador() {
+            clics = 0;
+
+            // Mostrar nuevamente el valor inicial
+            document.getElementById("contador").textContent = clics;
+        }
+    </script>
+
+</body>
+</html>
