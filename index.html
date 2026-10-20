@@ -5,7 +5,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contador de Clics - Colegio Bolívar</title>
+
+    <style>
+        /* Estilos generales - Modo Oscuro */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #071426, #102b4e);
+            color: #f0f6ff;
+            text-align: center;
+        }
+
+        /* Encabezado */
+        header {
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #00f5ff;
+            text-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+        }
+
+        header h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #b8cce4;
+        }
+
+        /* Tarjeta principal */
+        main {
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 30px;
+            background: rgba(16, 35, 63, 0.9);
+            border: 1px solid #24496d;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        main p {
+            color: #b8cce4;
+            font-size: 1rem;
+        }
+
+        /* Número del contador */
+        #contador {
+            font-size: 6rem;
+            font-weight: bold;
+            color: #00ffb3;
+            margin: 30px 0;
+            text-shadow: 0 0 25px rgba(0, 255, 179, 0.6);
+        }
+
+        /* Botones */
+        button {
+            width: 100%;
+            padding: 16px 24px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* Botón principal neón */
+        #btnContar {
+            background: #00f5ff;
+            color: #061426;
+            box-shadow: 0 0 18px rgba(0, 245, 255, 0.45);
+        }
+
+        #btnContar:hover {
+            background: #67ffff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.8);
+        }
+
+        /* Botón de reinicio */
+        #btnReiniciar {
+            background: transparent;
+            color: #ff6b9a;
+            border: 2px solid #ff6b9a;
+        }
+
+        #btnReiniciar:hover {
+            background: #ff6b9a;
+            color: #071426;
+            box-shadow: 0 0 20px rgba(255, 107, 154, 0.5);
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 4px;
+        }
+
+        /* Pie de página */
+        footer {
+            margin-top: 35px;
+            font-size: 0.85rem;
+            color: #91a9c4;
+        }
+
+        /* Diseño adaptable */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 30px 20px;
+            }
+
+            #contador {
+                font-size: 5rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
     <header>
@@ -16,13 +151,13 @@
     <main>
         <p>Haz clic en el botón para incrementar el contador.</p>
 
-        <h2 id="contador">0</h2>
+        <h2 id="contador" aria-live="polite">0</h2>
 
         <button id="btnContar" onclick="incrementarContador()">
-            ¡Haz clic aquí!
+            + Agregar clic
         </button>
 
-        <button onclick="reiniciarContador()">
+        <button id="btnReiniciar" onclick="reiniciarContador()">
             Reiniciar contador
         </button>
     </main>
@@ -32,14 +167,14 @@
     </footer>
 
     <script>
-        // Variable para almacenar el número de clics
+        // Variable que almacena el número de clics
         let clics = 0;
 
         // Función para incrementar el contador
         function incrementarContador() {
             clics++;
 
-            // Actualizar el contenido de la página
+            // Actualizar el número mostrado
             document.getElementById("contador").textContent = clics;
         }
 
@@ -47,10 +182,11 @@
         function reiniciarContador() {
             clics = 0;
 
-            // Mostrar nuevamente el valor inicial
+            // Actualizar el número mostrado
             document.getElementById("contador").textContent = clics;
         }
     </script>
 
 </body>
 </html>
+
