@@ -7,7 +7,7 @@
     <title>Contador de Clics - Colegio Bolívar</title>
 
     <style>
-        /* Estilos generales - Modo Oscuro */
+        /* Estilos generales - Dark Mode */
         * {
             box-sizing: border-box;
         }
@@ -23,11 +23,12 @@
             background: linear-gradient(135deg, #071426, #102b4e);
             color: #f0f6ff;
             text-align: center;
+            padding: 20px;
         }
 
         /* Encabezado */
         header {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         header h1 {
@@ -44,18 +45,52 @@
 
         /* Tarjeta principal */
         main {
-            width: 90%;
+            width: 100%;
             max-width: 450px;
-            padding: 40px 30px;
-            background: rgba(16, 35, 63, 0.9);
+            padding: 35px 30px;
+            background: rgba(16, 35, 63, 0.95);
             border: 1px solid #24496d;
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
-        main p {
+        /* Campo de texto */
+        .campo-evento {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .campo-evento label {
+            display: block;
+            margin-bottom: 10px;
             color: #b8cce4;
+            font-size: 0.95rem;
+        }
+
+        #nombreEvento {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #24496d;
+            border-radius: 10px;
+            background: #071426;
+            color: #ffffff;
             font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #nombreEvento:focus {
+            border-color: #00f5ff;
+            box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Título dinámico */
+        #tituloEvento {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin: 20px 0;
+            overflow-wrap: anywhere;
         }
 
         /* Número del contador */
@@ -63,7 +98,7 @@
             font-size: 6rem;
             font-weight: bold;
             color: #00ffb3;
-            margin: 30px 0;
+            margin: 25px 0;
             text-shadow: 0 0 25px rgba(0, 255, 179, 0.6);
         }
 
@@ -81,7 +116,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        /* Botón principal neón */
+        /* Botón incrementar */
         #btnContar {
             background: #00f5ff;
             color: #061426;
@@ -94,7 +129,7 @@
             box-shadow: 0 0 30px rgba(0, 245, 255, 0.8);
         }
 
-        /* Botón de reinicio */
+        /* Botón reiniciar */
         #btnReiniciar {
             background: transparent;
             color: #ff6b9a;
@@ -124,18 +159,22 @@
             color: #91a9c4;
         }
 
-        /* Diseño adaptable */
+        /* Diseño responsive */
         @media (max-width: 480px) {
             header h1 {
                 font-size: 2rem;
             }
 
             main {
-                padding: 30px 20px;
+                padding: 25px 20px;
             }
 
             #contador {
                 font-size: 5rem;
+            }
+
+            #tituloEvento {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -149,17 +188,40 @@
     </header>
 
     <main>
-        <p>Haz clic en el botón para incrementar el contador.</p>
 
-        <h2 id="contador" aria-live="polite">0</h2>
+        <!-- Campo para modificar el título -->
+        <div class="campo-evento">
+            <label for="nombreEvento">
+                Nombre del evento:
+            </label>
 
+            <input
+                type="text"
+                id="nombreEvento"
+                placeholder="Escribe el nombre del evento"
+                value="Evento Colegio Bolívar"
+                oninput="actualizarTitulo()"
+            >
+        </div>
+
+        <!-- Título que cambia en tiempo real -->
+        <h2 id="tituloEvento">Evento Colegio Bolívar</h2>
+
+        <p>Haz clic para registrar una participación.</p>
+
+        <!-- Contador -->
+        <div id="contador" aria-live="polite">0</div>
+
+        <!-- Botón incrementar -->
         <button id="btnContar" onclick="incrementarContador()">
             + Agregar clic
         </button>
 
+        <!-- Botón reiniciar -->
         <button id="btnReiniciar" onclick="reiniciarContador()">
-            Reiniciar contador
+            Reiniciar Contador
         </button>
+
     </main>
 
     <footer>
@@ -167,26 +229,31 @@
     </footer>
 
     <script>
-        // Variable que almacena el número de clics
+        // Variable que almacena los clics
         let clics = 0;
 
-        // Función para incrementar el contador
+        // Incrementar el contador
         function incrementarContador() {
             clics++;
 
-            // Actualizar el número mostrado
             document.getElementById("contador").textContent = clics;
         }
 
-        // Función para reiniciar el contador
+        // Reiniciar el contador a cero
         function reiniciarContador() {
             clics = 0;
 
-            // Actualizar el número mostrado
             document.getElementById("contador").textContent = clics;
+        }
+
+        // Actualizar el título mientras el usuario escribe
+        function actualizarTitulo() {
+            const nombre = document.getElementById("nombreEvento").value;
+
+            document.getElementById("tituloEvento").textContent =
+                nombre.trim() === "" ? "Evento sin título" : nombre;
         }
     </script>
 
 </body>
 </html>
-
